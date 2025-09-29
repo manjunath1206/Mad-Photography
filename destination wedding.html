@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography Gallery with Custom Navbar</title>
+    <style>
+        /* --- GLOBAL RESET and FONT --- */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0; /* Removing body padding to allow the navbar to go edge-to-edge */
+            background-color: #f4f4f4;
+        }
+
+        /* --- 1. NAVBAR STYLES --- */
+        .navbar {
+            display: flex;
+            align-items: stretch; /* Stretch items vertically to fill the height */
+            height: 80px; /* Fixed height for the navbar */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Left Logo/Brand Section */
+        .brand-section {
+            background-color: #e0e0e0; /* Light Gray */
+            width: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10px;
+            color: #4a148c; /* Dark Purple */
+            font-size: 1.2em;
+            font-weight: bold;
+            line-height: 1.2;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        /* Center Navigation Menu */
+        .nav-menu {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            
+        }
+
+        .nav-menu li {
+            position: relative;
+            padding: 0 15px;
+            height: 100%; /* Important for stretching the hover/active area */
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 15px;
+            text-transform: uppercase;
+            padding: 2px 0; /* Vertical padding for active indicator */
+        }
+
+        /* Active/Hover Indicator */
+        .nav-menu li:hover a {
+            color: #d81b60; /* Pink for hover text */
+        }
+        
+        /* The specific item that appears 'active' in the image (Baby Photography) */
+        .nav-menu .active-item a {
+            color: #d81b60; /* Darker Pink for active text */
+        }
+
+        .nav-menu .active-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 30px); /* Full width minus padding */
+            height: 5px;
+            background-color: #d81b60; /* Darker Pink bar */
+        }
+
+        /* Right Call-to-Action (CTA) Block */
+        .cta-section {
+            display: flex;
+        }
+
+        .cta-shop {
+            background-color: #ec407a; /* Medium Pink */
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 1em;
+        }
+
+        .cta-call {
+            background-color: #c2185b; /* Darker Pink/Maroon */
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 20px;
+            font-size: 0.8em;
+            line-height: 1.2;
+            text-align: center;
+        }
+        
+        .cta-call strong {
+            font-size: 1.4em;
+            font-weight: 900;
+        }
+
+        .cta-book {
+            background-color: #f06292; /* Bright Pink */
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            line-height: 1.1;
+            text-align: center;
+            width: 50px; /* Small fixed width */
+        }
+        
+        .cta-book span {
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        /* --- 2. IMAGE GALLERY STYLES (Copied from previous response, adjusted padding) --- */
+        .gallery-wrapper {
+            padding: 20px; /* Re-add padding around the gallery content */
+        }
+
+        /* 1. Gallery Container (The Grid) */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 2. Individual Gallery Item */
+        .gallery-item {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            overflow: hidden;
+            border-radius: 5px;
+        }
+
+        /* 3. The Image Inside the Item */
+        .gallery-item img {
+            /* Changed width/height from fixed 500px back to 100% for responsiveness */
+            width: 100%; 
+            height: 100%;
+            object-fit: cover; 
+            display: block;
+            transition: transform 0.3s ease-in-out;
+            /* Added aspect-ratio for better control of the image box height */
+            aspect-ratio: 4/3; 
+        }
+
+        /* Optional: Hover Effect */
+        .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- Responsive Design (Media Query for Gallery) --- */
+        @media (max-width: 1000px) {
+            /* Reduce padding and font sizes on smaller screens for navbar */
+            .nav-menu a { font-size: 0.8em; }
+            .nav-menu li { padding: 0 10px; }
+            .cta-call { padding: 5px 10px; }
+            .cta-call strong { font-size: 1.2em; }
+        }
+
+        @media (max-width: 768px) {
+            /* Stack the menu items for mobile */
+            .nav-menu {
+                display: none; /* Hide the nav links on small screens */
+            }
+            .navbar {
+                height: auto;
+            }
+            .brand-section {
+                width: 120px;
+                font-size: 1em;
+            }
+            .cta-shop {
+                display: none; /* Hide the SHOP button to save space */
+            }
+            
+            .image-gallery {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .image-gallery {
+                grid-template-columns: 1fr; /* 1 column on phones */
+            }
+            .cta-section {
+                flex-grow: 1; /* Allow CTA block to take up remaining space */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="brand-section"><a href="index.html">Mad<br>Photography</a>
+            
+        </div>
+        
+        <ul class="nav-menu">
+            <li><a href="index.html">Weddings <span class="dropdown-arrow">▼</span></a></li>
+            <li ><a href="baby photography.html">Baby Photography <span class="dropdown-arrow">▼</span></a></li>
+            <li><a href="gallery.html">Gallery <span class="dropdown-arrow">▼</span></a></li>
+            <li class="active-item"><a href="destination wedding.html">Destination Weddings <span class="dropdown-arrow">▼</span></a></li>
+            <li><a href="others.html">Others <span class="dropdown-arrow">▼</span></a></li>
+            <li><a href="location.html">Locations <span class="dropdown-arrow">▼</span></a></li>
+        </ul>
+
+        <div class="cta-section">
+            <div class="cta-shop">SHOP</div>
+            <div class="cta-call">
+                CALL<br>
+                <strong>9360272609</strong>
+            </div>
+            <div class="cta-book">
+                BOOK<br>
+                US<br>
+                <span>NOW</span>
+            </div>
+        </div>
+    </nav>
+    <div class="gallery-wrapper">
+        <div class="image-gallery">
+
+            <div class="gallery-item">
+                <img src="images/des image1.webp" alt="Couple on Wedding Day" style="transform: scale(-0.5);">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/des 2.webp" alt="Couple by the lake">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/chritian wedding.webp" alt="Couple in a garden">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/malayalam wedding.webp" alt="Couple under a tree">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/telugu wedding.webp" alt="Couple close-up">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/traditional wedding.webp" alt="Couple at sunset">
+            </div>
+
+        </div>
+    </div>
+    </body>
+</html>

@@ -1,0 +1,615 @@
+/* --- GLOBAL RESET and FONT --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    scroll-behavior: smooth; 
+}
+
+body {
+    background-color: #f8f8f8; 
+    line-height: 1.6;
+    overflow-x: hidden; 
+    width: 100%;
+}
+
+/* --- COLORS & UTILITIES --- */
+:root {
+    --primary-pink: #cc0052;
+    --secondary-pink: #e6007e;
+    --cta-bg-pink: #e65293; 
+    --dark-gray: #333;
+    --footer-bg: #2d2d2d; 
+    --location-header-bg: #3c3c3c; 
+}
+
+.mt-20 { margin-top: 20px; }
+
+/* --- 1. FIXED NAVIGATION BAR (Sticky) --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    height: 65px; 
+    z-index: 1000;
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Updated Logo Styling */
+.logo-text {
+    font-size: 22px; 
+    font-weight: 700;
+    color: var(--primary-pink);
+    text-shadow: 0 0 15px black;
+}
+.logo-text a{
+    text-decoration: none;
+}
+
+/* Navigation Links */
+.main-nav {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; 
+}
+.nav-list {
+    list-style: none;
+    display: flex;
+    margin-left: 20px;
+}
+.nav-item {
+    position: relative;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+}
+.nav-item a {
+    text-decoration: none;
+    color: var(--dark-gray);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 22px 0; 
+    white-space: nowrap;
+    transition: color 0.3s;
+}
+
+.nav-item a:hover, .nav-item .active {
+    color: var(--primary-pink);
+    border-bottom: 3px solid var(--primary-pink); 
+}
+
+.arrow-down {
+    font-size: 10px;
+    margin-left: 5px;
+}
+
+/* Dropdown Content Base Style */
+.dropdown-content {
+    display: none; 
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 999;
+    border-top: 3px solid var(--primary-pink);
+    padding: 5px 0;
+    border-radius: 0 0 5px 5px;
+}
+
+.dropdown-content a {
+    color: #444;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    font-size: 14px;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+    color: var(--primary-pink);
+}
+
+.nav-item.dropdown:hover .dropdown-content,
+.header-actions .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/* Header Action Buttons */
+.header-actions {
+    display: flex;
+    align-items: stretch; 
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* SHOP Button with Frame details */
+.shop-btn {
+    background-color: var(--secondary-pink);
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    position: relative; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.shop-btn:hover {
+    background-color: #ff66a3; 
+}
+
+.shop-frame-content {
+    left: auto;
+    right: 0;
+    min-width: 250px;
+    padding: 15px;
+}
+.shop-frame-content h4 {
+    color: var(--primary-pink);
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+.shop-frame-content p {
+    color: #555;
+    padding: 5px 0;
+    font-size: 14px;
+}
+
+/* CALL Section with new number */
+.call-btn {
+    background-color: var(--primary-pink);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    line-height: 1.2;
+}
+
+.phone-number {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+/* BOOK US NOW Button with Form */
+.book-btn {
+    background-color: #f06; 
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    position: relative; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.book-btn:hover {
+    background-color: #ff3377; 
+}
+
+.booking-form-content {
+    left: auto;
+    right: 0;
+    min-width: 320px;
+    padding: 20px;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.3);
+}
+.booking-form-content h4 {
+    color: var(--primary-pink);
+    margin-bottom: 15px;
+    font-size: 16px;
+    text-align: center;
+}
+.booking-form-content input,
+.booking-form-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primary-pink);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.submit-btn:hover {
+    background-color: var(--secondary-pink);
+}
+
+/* --- 2. HERO SECTION --- */
+.hero-section {
+    padding-top: 20px; 
+}
+
+.hero-split {
+    display: flex;
+    min-height: 700px; 
+    max-width: 100%; 
+}
+
+/* Curved Image Column */
+.image-column.main-hero {
+    flex: 1.2; 
+    position: relative;
+    overflow: hidden;
+    background-color: #eee;
+    border-bottom-right-radius: 150px; 
+    border-top-right-radius: 150px;
+    box-shadow: 6px 0 10px rgba(0, 0, 0, 0.1); 
+}
+
+.main-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center; 
+}
+
+.image-wedding {
+    background-image: url('photo1.webp'); 
+    height: 100%;
+}
+
+/* Text and Secondary Content */
+.text-and-secondary-content {
+    flex: 1; 
+    display: flex;
+    flex-direction: column; 
+    padding: 60px 80px 60px 60px;
+}
+
+.text-column {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.text-column h1 {
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--dark-gray);
+    margin-bottom: 20px;
+}
+
+.text-column p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Browse Button as Anchor tag */
+.browse-btn {
+    align-self: flex-start; 
+    background-color: white;
+    color: var(--primary-pink);
+    border: 2px solid var(--primary-pink);
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Crucial for anchor tag */
+    transition: all 0.3s; 
+}
+
+.browse-btn:hover {
+    background-color: var(--primary-pink);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Secondary Image/Banner */
+.secondary-image-container {
+    height: 300px; 
+    width: 100%;
+    overflow: hidden;
+    margin-top: 20px;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.secondary-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.8);
+}
+.secondary-image img{
+    height: 300px;
+    width: 510px;
+}
+
+.image-toddler-banner {
+    background-image: url('image_9c1bca.jpg');
+}
+
+.overlay-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    font-size: 28px;
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+}
+
+.cta-buttons-sm {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.quote-btn {
+    background-color: white;
+    color: var(--primary-pink);
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s; 
+}
+.quote-btn:hover {
+    background-color: #f1f1f1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.chat-btn {
+    background-color: #d8e6f1; 
+    color: var(--dark-gray);
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 0.3s; 
+}
+.chat-btn:hover {
+    background-color: #b3c9db;
+}
+
+/* --- 3. PHOTO GRID SECTIONS --- */
+/* REMOVED: .filter-bar */
+/* REMOVED: .filter-links a, .filter-links a:hover, .filter-links .filter-active */
+
+.photo-grid-section {
+    padding: 60px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: white; 
+}
+
+.section-title {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--dark-gray);
+    margin-bottom: 50px;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px; 
+}
+
+.grid-item {
+    position: relative;
+    border-radius: 12px; 
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); 
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s; 
+}
+.grid-item:hover {
+    transform: translateY(-8px); 
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+.grid-item .item-image {
+    width: 100%;
+    height: 320px; 
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+}
+
+
+.grid-item .caption {
+    position: absolute;
+    bottom: 20px; 
+    left: 20px;
+    width: calc(100% - 40px);
+    text-align: left; 
+    color: white;
+    font-size: 24px; 
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    text-transform: capitalize;
+}
+
+/* Wedding Image Placeholders (Matching image_9222e7.jpg) */
+.image-trad-1 { background-image: url('images/traditional\ wedding.webp'); background-position: left center; }
+.image-trad-2 { background-image: url('images/chritian\ wedding.webp'); background-position: center; }
+.image-trad-3 { background-image: url('images/muslim\ wedding.webp'); background-position: right center; }
+.image-trad-4 { background-image: url('images/north\ indian\ wedding.webp'); }
+.image-trad-5 { background-image: url('images/malayalam\ wedding.webp'); }
+.image-trad-6 { background-image: url('images/telugu\ wedding.webp'); }
+
+/* REMOVED: Baby Photography Images (.image-baby-...) */
+
+
+/* --- 4. LOCATION GRID SECTION (Removed) --- */
+/* REMOVED: .location-section, .location-header, .location-grid, .grid-item-location, etc. */
+
+
+/* --- 5. BOOK US NOW CTA BANNER --- */
+.cta-banner {
+    background-color: var(--cta-bg-pink); 
+    color: white;
+    padding: 50px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0;
+}
+
+.cta-text h2 {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.cta-text p {
+    font-size: 16px;
+    max-width: 600px;
+}
+
+.cta-phone {
+    font-size: 32px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.phone-icon {
+    font-size: 32px;
+    margin-right: 15px;
+}
+
+/* --- 6. DETAILED FOOTER --- */
+.site-footer.detailed-footer {
+    background-color: var(--footer-bg);
+    color: #ccc;
+    padding: 60px 80px 20px;
+    font-size: 14px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: 0 auto 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #555;
+}
+
+.footer-column {
+    /* Adjusted flex-basis for remaining columns */
+    flex-basis: 23%; 
+    padding: 0 10px;
+}
+
+.footer-column h4 {
+    color: var(--primary-pink); 
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column li {
+    margin-bottom: 8px;
+    cursor: pointer;
+    line-height: 1.3;
+    transition: color 0.3s; 
+}
+
+.footer-column li:hover {
+    color: var(--primary-pink);
+}
+
+/* REMOVED: .address-detail */
+
+.footer-bottom {
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+}
+
+/* --- 7. UP BUTTON (Accessibility) --- */
+.up-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-pink);
+    color: white;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 998;
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s; 
+}
+
+.up-button:hover {
+    background-color: var(--secondary-pink);
+    transform: translateY(-7px) scale(1.1); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+.book-floating-btn {
+    position: fixed;
+    top: 80px;  /* adjust this so it sits just below navbar */
+    right: 30px;
+    background-color: var(--primary-pink);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 30px; /* pill shape */
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* space between icon & text */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    transition: all 0.3s ease;
+}
+
+.book-floating-btn:hover {
+    background-color: var(--secondary-pink);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}

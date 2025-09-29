@@ -1,0 +1,564 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        /* --- GLOBAL RESET and FONT --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    scroll-behavior: smooth; 
+}
+
+body {
+    background-color: #f8f8f8; 
+    line-height: 1.6;
+    overflow-x: hidden; 
+    width: 100%;
+}
+
+/* --- COLORS & UTILITIES --- */
+:root {
+    --primary-pink: #cc0052; 
+    --secondary-pink: #e6007e; 
+    --cta-bg-pink: #e93374; 
+    --dark-gray: #333;
+    --footer-bg: #404040; 
+    --bright-pink-bg: #e93374; /* Used for SHOP and BOOK US NOW */
+    --call-pink-bg: #cc0052; /* Used for CALL */
+}
+
+/* --- 1. FIXED NAVIGATION BAR (Sticky) --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    background-color: #000; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+    height: 65px; 
+    z-index: 1000;
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+/* Logo: Occupies a fixed space on the left */
+.logo {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #f8f8f8; /* White background for the logo corner */
+    width: 100px; /* Fixed width for the logo space */
+    clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%); /* Optional: for the slanted effect if desired */
+    /* Remove 'logo-text' if using an image, otherwise use it to style text */
+}
+
+.logo-img {
+    height: 40px; 
+    width: auto;
+    /* Placeholder for the 'D' logo, using an image file */
+    content: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"%3E%3Cpath fill="%23E93374" d="M250 0C111.9 0 0 111.9 0 250c0 138.1 111.9 250 250 250s250-111.9 250-250C500 111.9 388.1 0 250 0zM200 400c-77.3 0-140-62.7-140-140s62.7-140 140-140c21.8 0 42.6 5.1 61.3 14.2l-29.4 34.6c-13.8-6.9-29.2-10.7-45.2-10.7-45.3 0-82 36.7-82 82s36.7 82 82 82c16.3 0 31.7-4.6 45.4-12.8l29.4 34.6C243 394.9 221.8 400 200 400z"/%3E%3C/svg%3E');
+
+}
+
+
+/* Navigation Links: Takes up the remaining horizontal space before actions */
+.main-nav {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Allows the nav to take up all available space */
+    justify-content: flex-start; /* Aligns links to the left of the available space */
+    
+}
+.nav-list {
+    list-style: none;
+    display: flex;
+    /* No left margin needed as the nav container handles positioning */
+}
+.nav-item {
+    position: relative;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+}
+.nav-item a {
+    text-decoration: none;
+    color: white; 
+    font-size: 14px;
+    font-weight: 500;
+    padding: 22px 0; 
+    white-space: nowrap;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+.nav-item a:hover, .nav-item .active {
+    color: white; 
+    border-bottom: 3px solid var(--primary-pink); 
+}
+/* Dropdown styles remain the same... */
+
+
+/* Header Action Buttons - Solid Pink Style */
+.header-actions {
+    display: flex;
+    align-items: stretch; 
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* SHOP Button */
+.shop-btn {
+    background-color: var(--bright-pink-bg); 
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    position: relative; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.shop-btn:hover {
+    background-color: #ff66a3; 
+}
+
+/* CALL Section */
+.call-btn {
+    background-color: var(--call-pink-bg); 
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    line-height: 1.2;
+}
+.phone-number {
+    font-size: 16px; 
+    font-weight: 700;
+}
+
+/* BOOK US NOW Button */
+.book-btn {
+    background-color: var(--bright-pink-bg); 
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    position: relative; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.book-btn:hover {
+    background-color: #ff3377; 
+}
+/* Dropdown form styles remain the same... */
+
+/* --- 2. FILTER BAR (Immediate under the dark navbar) --- */
+.photo-grid-section-clean {
+    /* Reduced padding to bring the filter bar closer to the navbar edge */
+    padding: 0px 80px 60px; 
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: white; 
+}
+
+.filter-bar {
+    text-align: center;
+    margin-top: 20px; /* Space between filter bar and grid */
+    margin-bottom: 30px;
+    padding: 10px 0;
+    max-width: 1200px; 
+    margin: 0 auto 30px; 
+}
+.filter-link {
+    text-decoration: none;
+    color: #444; 
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 15px;
+    margin: 0 10px;
+    transition: color 0.3s;
+    white-space: nowrap;
+}
+.filter-link:hover {
+    color: var(--primary-pink);
+}
+.filter-active {
+    color: #000; 
+    font-weight: 700;
+}
+
+/* --- 3. PHOTO GRID SECTIONS (Adjusted for clean page start) --- */
+.photo-grid.grid-page-content {
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px; 
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.grid-item {
+    position: relative;
+    border-radius: 12px; 
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); 
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s; 
+}
+.grid-item:hover {
+    transform: translateY(-8px); 
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+.grid-item .item-image {
+    width: 100%;
+    height: 320px; 
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+}
+.grid-item .caption {
+    position: absolute;
+    bottom: 20px; 
+    left: 20px;
+    width: calc(100% - 40px);
+    text-align: left; 
+    color: white;
+    font-size: 24px; 
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    text-transform: capitalize;
+}
+
+/* --- Baby Photography Image Placeholders (Using uploaded file names) --- */
+/* The files you provided are used for the first few images */
+.image-baby-1 { background-image: url(images/baby1.jpg); } 
+.image-baby-2 { background-image: url(images/baby2.jpg); }
+.image-baby-3 { background-image: url(images/baby3.jpg); }
+.image-baby-4 { background-image: url('https://picsum.photos/id/403/600/600'); } 
+.image-baby-5 { background-image: url('https://picsum.photos/id/405/600/600'); } 
+.image-baby-6 { background-image: url('https://picsum.photos/id/406/600/600'); } 
+.image-baby-7 { background-image: url('https://picsum.photos/id/407/600/600'); } 
+.image-baby-8 { background-image: url('https://picsum.photos/id/408/600/600'); } 
+.image-baby-9 { background-image: url('https://picsum.photos/id/409/600/600'); } 
+.image-baby-10 { background-image: url('https://picsum.photos/id/410/600/600'); } 
+.image-baby-11 { background-image: url('https://picsum.photos/id/411/600/600'); } 
+.image-baby-12 { background-image: url('https://picsum.photos/id/412/600/600'); } 
+
+
+/* --- 5. BOOK US NOW CTA BANNER (Full width to match reference) --- */
+.cta-banner-full {
+    background-color: var(--cta-bg-pink); 
+    color: white;
+    padding: 50px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0;
+    width: 100%; 
+}
+.cta-text h2 {
+    font-size: 36px;
+    font-weight: 700;
+}
+.cta-text p {
+    font-size: 16px;
+    max-width: 600px;
+}
+.cta-phone {
+    font-size: 32px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+.phone-icon {
+    font-size: 32px;
+    margin-right: 15px;
+}
+
+/* --- 6. DETAILED FOOTER --- */
+.site-footer.detailed-footer {
+    background-color: var(--footer-bg); 
+    color: #ccc;
+    padding: 60px 80px 20px;
+    font-size: 14px;
+}
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: 0 auto 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #555;
+}
+.footer-column {
+    flex-basis: 18%; 
+    padding: 0 10px;
+}
+.footer-column h4 {
+    color: #fff; 
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.footer-column ul {
+    list-style: none;
+}
+.footer-column li {
+    margin-bottom: 8px;
+    cursor: pointer;
+    line-height: 1.3;
+    transition: color 0.3s; 
+}
+.footer-column li:hover {
+    color: var(--primary-pink);
+}
+.footer-column .address-li {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    cursor: default;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+}
+
+/* --- 7. UP BUTTON (Accessibility) --- */
+.up-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-pink);
+    color: white;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 998;
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s; 
+}
+.up-button:hover {
+    background-color: var(--secondary-pink);
+    transform: translateY(-7px) scale(1.1); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby Photography - Mad Photography</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+</head>
+<body id="top">
+    <header class="navbar">
+        <div class="logo">
+           <span class="logo-text" style="z-index: 2; position: relative;"><a href="index.html">Mad Photography</a></span> 
+        </div>
+        
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li class="nav-item dropdown">
+                    <a href="index.html">WEDDINGS <span class="arrow-down">▼</span></a> 
+                    <div class="dropdown-content">
+                        <a href="#">Outdoor & Candid</a>
+                        <a href="#">Traditional Ceremony</a>
+                        <a href="#">Destination Wedding</a>
+                        <a href="#">Pre-Wedding Shoots</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="baby-photography.html" class="active">BABY PHOTOGRAPHY <span class="arrow-down">▼</span></a>
+                    <div class="dropdown-content">
+                        <a href="#">Newborn Shoots</a>
+                        <a href="#">Baby Milestone Sessions</a>
+                        <a href="#">Maternity Shoots</a>
+                        <a href="#">Toddler Portraits</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="gallery.html">GALLERY <span class="arrow-down">▼</span></a>
+                    <div class="dropdown-content">
+                        <a href="#">Bridal Portraits</a>
+                        <a href="#">Couple Albums</a>
+                        <a href="#">Candid Moments</a>
+                        <a href="#">Cinematic Films</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="destination wedding.html">DESTINATION WEDDINGS <span class="arrow-down">▼</span></a>
+                    <div class="dropdown-content">
+                        <a href="#">International Locations</a>
+                        <a href="#">Beach Weddings (Goa/Kerala)</a>
+                        <a href="#">Palace Weddings (Rajasthan)</a>
+                        <a href="#">Hill Station Events</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#">OTHERS <span class="arrow-down">▼</span></a>
+                    <div class="dropdown-content">
+                        <a href="#">Corporate Events</a>
+                        <a href="#">Family Portraits</a>
+                        <a href="#">Fashion Shoots</a>
+                        <a href="#">Anniversary Shoots</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#location-section">LOCATIONS <span class="arrow-down">▼</span></a>
+                     <div class="dropdown-content">
+                        <a href="#">Chennai</a>
+                        <a href="#">Bangalore</a>
+                        <a href="#">Calicut</a>
+                        <a href="#">Vellore & Salem</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <div class="shop-btn dropdown">
+                SHOP
+                <div class="dropdown-content shop-frame-content">
+                    <h4>Available Frames</h4>
+                    <p>Standard Wood Frame - $50</p>
+                    <p>Premium Canvas - $120</p>
+                    <p>Acrylic Display - $180</p>
+                </div>
+            </div>
+            <div class="call-btn">
+                CALL
+                <span class="phone-number">9360272609</span>
+            </div>
+            <div class="book-btn dropdown"> 
+                BOOK US NOW
+                <div class="dropdown-content booking-form-content">
+                    <h4>Book Your Session</h4>
+                    <form>
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <input type="tel" placeholder="Phone Number" required>
+                        <textarea placeholder="Event Details"></textarea>
+                        <button type="submit" class="submit-btn">Send Booking Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="content-area">
+        
+        <section id="baby-gallery-section" class="photo-grid-section-clean">
+            <div class="filter-bar">
+                <a href="#" class="filter-link filter-active">All</a>
+                <a href="#" class="filter-link">Baby Shower</a>
+                <a href="#" class="filter-link">Baby Shoots</a>
+                <a href="#" class="filter-link">Baby Bumps</a>
+            </div>
+            
+            <div class="photo-grid grid-page-content">
+                <div class="grid-item"><div class="item-image image-baby-1"></div><span class="caption">...</span></div>
+                <div class="grid-item"><div class="item-image image-baby-2"></div><span class="caption">...</span></div>
+                <div class="grid-item"><div class="item-image image-baby-3"></div><span class="caption">...</span></div>
+                
+                <div class="grid-item"><div class="item-image image-baby-4"></div><span class="caption">First Birthday</span></div>
+                <div class="grid-item"><div class="item-image image-baby-5"></div><span class="caption">Cake Smash</span></div>
+                <div class="grid-item"><div class="item-image image-baby-6"></div><span class="caption">Newborn Shoot</span></div>
+                
+                <div class="grid-item"><div class="item-image image-baby-7"></div><span class="caption">Maternity</span></div>
+                <div class="grid-item"><div class="item-image image-baby-8"></div><span class="caption">Toddler Play</span></div>
+                <div class="grid-item"><div class="item-image image-baby-9"></div><span class="caption">Family Portrait</span></div>
+
+                <div class="grid-item"><div class="item-image image-baby-10"></div><span class="caption">Little Explorer</span></div>
+                <div class="grid-item"><div class="item-image image-baby-11"></div><span class="caption">6 Months Milestone</span></div>
+                <div class="grid-item"><div class="item-image image-baby-12"></div><span class="caption">Joyful Heart</span></div>
+
+            </div>
+        </section>
+        
+        <section class="cta-banner cta-banner-full">
+            <div class="cta-text">
+                <h2>BOOK US NOW</h2>
+                <p>Get in touch with us and let us make your special day an event of your lifetime using our digital eye.</p>
+            </div>
+            <div class="cta-phone">
+                <span class="phone-icon">📞</span>
+                +91 9840767566
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer detailed-footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>WEDDINGS</h4>
+                <ul>
+                    <li>Outdoor Wedding Photography</li>
+                    <li>Muslim Wedding Photography</li>
+                    <li>Christian Wedding Photography</li>
+                    <li>Brahmin Wedding Photography</li>
+                    <li>Telugu Wedding</li>
+                    <li>Rituals</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>GALLERY</h4>
+                <ul>
+                    <li>GALLERY</li>
+                    <li>Bridal Portraits</li>
+                    <li>Couple Portraits</li>
+                    <li>Groom Portraits</li>
+                    <li>Jewellery</li>
+                    <li>Candid Moments</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>OUTDOOR</h4>
+                <ul>
+                    <li>Pre-wedding Photography</li>
+                    <li>Post-wedding Photography</li>
+                </ul>
+                <h4 style="margin-top: 20px;">VIDEO</h4>
+                <ul>
+                    <li>Candid Wedding Films</li>
+                    <li>Outdoor Wedding Films</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>LOCATIONS</h4>
+                <ul>
+                    <li>London Wedding Photography</li>
+                    <li>Vellore Wedding Photography</li>
+                    <li class="address-li">Address: No 61, vellore-Katpadi main road Inbetween Odai Pillayar Koil & Bombay Anandha Bhavan, Vellore, Tamil Nadu 632007.</li>
+                    <li>Salem Wedding Photography</li>
+                    <li class="address-li">Address: 1st floor, V&V Complex, No 234, CHAIRMAN, Thammanman Rd, Four Roads, Arisipalayam, Salem, Tamil Nadu 636009.</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>LATEST BLOG UPDATES</h4>
+                <ul>
+                    <li>The Best Locations for Captivating...</li>
+                    <li>How to Use Natural Light for Stunning...</li>
+                    <li>How to Prepare Your Baby for a Photoshoot...</li>
+                    <li>The Role of Props in Pre-Wedding...</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Mad Photography. All rights reserved.
+        </div>
+    </footer>
+
+    <a href="#top" id="up-button" class="up-button" aria-label="Go to top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</body>
+</html>

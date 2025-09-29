@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mad Photography - Homepage Layout</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* --- CSS Reset & Variables --- */
+    
+    /* --- GLOBAL RESET and FONT --- */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    /* --- COLORS & UTILITIES --- */
+    :root {
+        /* Matching the bright pinks and magenta in the image */
+        --primary-pink: #cc0052;        /* Darker link underline / background */
+        --cta-bg-magenta: #e9007e;      /* SHOP and BOOK US NOW button background */
+        --call-pink-bg: #c90069;        /* CALL button background (darker magenta) */
+        --logo-color: #5d00a3;          /* Dark Purple text for logo */
+        --link-color: #333;             /* Dark grey for navbar links */
+        --active-link-underline: #cc0052; /* Pink underline color */
+        --white: #fff;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    body {
+        /* Added for context, though only navbar is styled here */
+        padding-top: 80px; /* To prevent content from hiding under sticky navbar */
+    }
+
+    /* --- 1. FIXED NAVIGATION BAR --- */
+    .navbar {
+        display: flex;
+        justify-content: flex-start; /* Aligns items to the left */
+        align-items: stretch; /* Stretches items (like buttons) to full height */
+        background-color: var(--white);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        height: 80px; /* Taller height to accommodate logo and phone number */
+        z-index: 1000;
+        position: fixed; /* Use 'fixed' instead of 'sticky' to stay visible always */
+        top: 0;
+        width: 100%;
+    }
+
+    /* Logo Block: Tall, wide, and dark purple */
+    .logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #dcdcdc; /* Light gray background matching the image */
+        width: 130px; /* Wide block for the stacked text */
+        padding: 0 15px;
+        color: var(--logo-color);
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1.1;
+        text-align: center;
+    }
+    .logo-text {
+        /* Subtle text shadow for that slightly blurry/glow effect in the image */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        font-size: 20px;
+    }
+
+    /* Navigation Links: Centered horizontally in the middle section */
+    .main-nav {
+        flex-grow: 1; /* Takes up all available space in the center */
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Center the entire list */
+    }
+
+    .nav-list {
+        list-style: none;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-item {
+        position: relative;
+        padding: 0 15px;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-item a {
+        text-decoration: none;
+        color: var(--link-color);
+        font-size: 14px;
+        font-weight: 500;
+        padding: 30px 0; /* Vertical padding helps align the underline */
+        white-space: nowrap;
+        transition: color 0.3s, border-bottom 0.3s;
+    }
+
+    /* Style for the active/current page link */
+    .nav-item.active a {
+        color: var(--active-link-underline);
+        border-bottom: 4px solid var(--active-link-underline);
+        /* Adds the pink underline below the active link */
+    }
+
+    .arrow-down {
+        font-size: 10px;
+        vertical-align: middle;
+        margin-left: 3px;
+        color: #888;
+    }
+    
+    /* --- 2. HEADER ACTION BUTTONS (Right Side) --- */
+    .header-actions {
+        display: flex;
+        height: 100%;
+        align-items: stretch; /* Crucial for vertical stretching */
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    .action-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 18px;
+        height: 100%; /* Ensures button stretches vertically */
+        cursor: pointer;
+        color: var(--white);
+        text-transform: uppercase;
+        line-height: 1.1;
+        white-space: nowrap;
+    }
+
+    /* SHOP Button (Far Left Pink Block) */
+    .shop-btn {
+        background-color: var(--cta-bg-magenta);
+    }
+
+    /* CALL Button (Middle Darker Block) */
+    .call-btn {
+        background-color: var(--call-pink-bg);
+        flex-direction: column; /* Stack CALL and number */
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .phone-number {
+        font-size: 20px; /* Large, bold phone number */
+        font-weight: 700;
+    }
+
+    /* BOOK US NOW Button (Far Right Pink Block) */
+    .book-btn {
+        background-color: var(--cta-bg-magenta);
+        flex-direction: column; /* Stack BOOK US NOW text */
+        font-weight: 700;
+        padding: 0 15px; /* Slightly less padding to stack text tightly */
+        font-size: 12px;
+    }
+
+    /* --- 2. MAIN CONTENT & GRID LAYOUT --- */
+        .content-area {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex; /* Establish flex container for the main columns */
+            gap: 20px; /* Space between the large and small columns */
+        }
+
+        /* Styles for the two main columns */
+        .column-large {
+            flex: 1; /* Takes up one part (approx. 50%) */
+        }
+
+        .column-small {
+            flex: 1; /* Takes up one part (approx. 50%) */
+            display: flex;
+            flex-direction: column; /* Stack the images vertically */
+            gap: 20px; /* Space between the two stacked images */
+        }
+
+        /* Image Box Styling */
+        .image-box {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Set specific heights to match the staggered look */
+        .image-box-large {
+            min-height: 600px; /* Tall image on the left */
+            /* Using a placeholder URL for the left image */
+            background-image: url(images/bengalore.webp);
+            
+        }
+
+        .image-box-top {
+            min-height: 400px; /* Top image in the right column */
+            /* Using a placeholder URL for the top-right image */
+            background-image: url(images/chennai.webp);
+        }
+
+        .image-box-bottom {
+            min-height: 380px; /* Bottom image in the right column */
+            /* Using a placeholder URL for the bottom-right image */
+            background-image: url(images/malayalam\ wedding.webp);
+        }
+        
+        /* 'Get a Quote' Button (Floating element) */
+        .quote-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--white);
+            color: var(--black);
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+</style>
+
+
+        
+
+    
+</head>
+<body>
+    
+    <header class="navbar">
+    <div class="logo">
+        <span class="logo-text"><a href="index.html">Mad <br>Photography</a></span>
+    </div>
+
+    <nav class="main-nav">
+        <ul class="nav-list">
+            <li class="nav-item">
+                <a href="index.html">WEDDINGS <span class="arrow-down">▼</span></a>
+            </li>
+            <li class="nav-item">
+                <a href="baby photography.html">BABY PHOTOGRAPHY <span class="arrow-down">▼</span></a>
+            </li>
+            <li class="nav-item active">
+                <a href="gallery.html">GALLERY <span class="arrow-down">▼</span></a>
+            </li>
+            <li class="nav-item">
+                <a href="destination wedding.html">DESTINATION WEDDINGS <span class="arrow-down">▼</span></a>
+            </li>
+            <li class="nav-item">
+                <a href="others.html">OTHERS <span class="arrow-down">▼</span></a>
+            </li>
+            <li class="nav-item">
+                <a href="location.html">LOCATIONS <span class="arrow-down">▼</span></a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="header-actions">
+        <div class="shop-btn action-btn">
+            SHOP
+        </div>
+        <div class="call-btn action-btn">
+            CALL
+            <span class="phone-number">9360272609</span>
+        </div>
+        <div class="book-btn action-btn">
+            BOOK<br>US<br>NOW
+        </div>
+    </div>
+</header>
+
+    <main class="content-area">
+        
+        <div class="column-large">
+            <div class="image-box image-box-large">
+                </div>
+        </div>
+        
+        <div class="column-small">
+            
+            <div class="image-box image-box-top">
+                </div>
+            
+            <div class="image-box image-box-bottom">
+               
+            </div>
+            
+        </div>
+    </main>
+
+</body>
+</html>
